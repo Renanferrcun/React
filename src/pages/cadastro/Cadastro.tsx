@@ -1,11 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-const ClipLoader = ({ color, size }: { color: string; size: number }) => (
-    <span
-        className="inline-block border-2 border-white rounded-full animate-spin"
-        style={{ width: size, height: size, borderColor: `${color} ${color} transparent transparent` }}
-    />
-);
+import { ClipLoader } from "react-spinners";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
 
