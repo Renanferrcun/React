@@ -1,4 +1,4 @@
-import { GithubLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react"
+import { FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react"
 
 
 function Footer() {
@@ -12,13 +12,16 @@ function Footer() {
                     <p className='text-xl font-bold'>
                         Blog Pessoal Generation | Copyright: {data}
                     </p>
-                    <p className='text-lg'>Acesse minhas redes sociais</p>
+                    <p className='text-lg'>Acesse nossas redes sociais</p>
                     <div className='flex gap-2'>
-                        <a href="https://www.linkedin.com/in/renanferreiracunha/" target="blank">
-                        <LinkedinLogoIcon size={48} weight='bold' />
+                        <a href="https://www.linkedin.com/in/seu_usuario" target="_blank">
+                            <LinkedinLogoIcon size={48} weight='bold' />
                         </a>
-                        <a href="https://github.com/Renanferrcun/" target="blank">
-                        <GithubLogoIcon size={48} weight='bold' />
+                        <a href="https://www.instagram.com/seu_usuario" target="_blank">
+                            <InstagramLogoIcon size={48} weight='bold' />
+                        </a>
+                        <a href="https://www.facebook.com/seu_usuario" target="_blank">
+                            <FacebookLogoIcon size={48} weight='bold' />
                         </a>
                     </div>
                 </div>
