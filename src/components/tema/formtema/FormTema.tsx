@@ -13,7 +13,14 @@ function FormTema() {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const { usuario, handleLogout } = useContext(AuthContext)
+    const { usuario, handleLogout } = useContext(AuthContext) 
+    // This line uses the useContext hook to access the AuthContext, 
+    // which provides authentication-related data and functions. 
+    // It destructures the context value to get the 'usuario' object 
+    // (which contains user information, including the token) and the 'handleLogout' function 
+    // (which can be called to log the user out). 
+    // This allows the component to manage authentication state and perform actions
+    //  based on whether the user is logged in or not.
     const token = usuario.token
 
     const { id } = useParams<{ id: string }>();
@@ -55,7 +62,8 @@ function FormTema() {
     }
 
     async function gerarNovoTema(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
+        e.preventDefault() // Prevents the default form submission behavior, 
+                            //which would cause a page reload.
         setIsLoading(true)
 
         if (id !== undefined) {
