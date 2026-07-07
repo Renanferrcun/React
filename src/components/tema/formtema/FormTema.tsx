@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormTema() {
 
@@ -13,14 +14,7 @@ function FormTema() {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const { usuario, handleLogout } = useContext(AuthContext) 
-    // This line uses the useContext hook to access the AuthContext, 
-    // which provides authentication-related data and functions. 
-    // It destructures the context value to get the 'usuario' object 
-    // (which contains user information, including the token) and the 'handleLogout' function 
-    // (which can be called to log the user out). 
-    // This allows the component to manage authentication state and perform actions
-    //  based on whether the user is logged in or not.
+    const { usuario, handleLogout } = useContext(AuthContext)
     const token = usuario.token
 
     const { id } = useParams<{ id: string }>();
@@ -31,7 +25,7 @@ function FormTema() {
                 headers: { Authorization: token }
             })
         } catch (error: any) {
-            if (error.toString().includes('403')) {
+            if (error.toString().includes('401')) {
                 handleLogout()
             }
         }
@@ -39,7 +33,7 @@ function FormTema() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado!')
+            ToastAlerta('Você precisa estar logado!', 'info')
             navigate('/')
         }
     }, [token])
@@ -62,8 +56,7 @@ function FormTema() {
     }
 
     async function gerarNovoTema(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault() // Prevents the default form submission behavior, 
-                            //which would cause a page reload.
+        e.preventDefault()
         setIsLoading(true)
 
         if (id !== undefined) {
@@ -71,12 +64,12 @@ function FormTema() {
                 await atualizar(`/temas`, tema, setTema, {
                     headers: { 'Authorization': token }
                 })
-                alert('O Tema foi atualizado com sucesso!')
+                ToastAlerta('O Tema foi atualizado com sucesso!', 'sucesso')
             } catch (error: any) {
                 if (error.toString().includes('401')) {
                     handleLogout();
                 } else {
-                    alert('Erro ao atualizar o tema.')
+                    ToastAlerta('Erro ao atualizar o tema.', 'erro')
                 }
 
             }
@@ -85,12 +78,12 @@ function FormTema() {
                 await cadastrar(`/temas`, tema, setTema, {
                     headers: { 'Authorization': token }
                 })
-                alert('O Tema foi cadastrado com sucesso!')
+                ToastAlerta('O Tema foi cadastrado com sucesso!', 'sucesso')
             } catch (error: any) {
                 if (error.toString().includes('401')) {
                     handleLogout();
                 } else {
-                    alert('Erro ao cadastrar o tema.')
+                    ToastAlerta('Erro ao cadastrar o tema.', 'erro')
                 }
 
             }
